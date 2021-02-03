@@ -51,6 +51,7 @@ class FSPersonalCenterTVC: UIViewController {
         self.tableView.tableHeaderView = self.headerV
         self.tableView.tableFooterView = self.footerV
         
+        //核心代码
         FSPersonalCenterScrollerManager.shared.mainScroller = self.tableView
 
     }
@@ -99,6 +100,7 @@ extension FSPersonalCenterTVC: UITableViewDelegate, UITableViewDataSource {
         return 0
     }
     
+    //核心代码
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y >=  self.headerV.bounds.height  {
             scrollView.contentOffset = CGPoint.init(x: 0, y: self.headerV.bounds.height)

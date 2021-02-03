@@ -2,6 +2,7 @@
 
 import UIKit
 
+// 核心类
 class FSPersonalCenterScrollerManager {
 
     weak var mainScroller:FSPersonalCenterTV?
@@ -12,12 +13,14 @@ class FSPersonalCenterScrollerManager {
     func disnableScroll(_ scroller: UIScrollView) -> Void {
         if scroller is FSPersonalCenterTV {
             let fstv  = scroller as! FSPersonalCenterTV
-            fstv.canScroll = false
+            
             if fstv == mainScroller {
                 viceScroller?.canScroll = true
             }else if fstv == viceScroller{
                 mainScroller?.canScroll = true
+                fstv.contentOffset = .zero
             }
+            fstv.canScroll = false
         }
     }
 

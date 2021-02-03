@@ -24,7 +24,6 @@ class FSPersnalCenterFooterV: UIView{
         let v = FSPersonalCenterTV.init(frame: self.bounds, style: .plain)
         v.dataSource = self
         v.delegate = self
-        v.bounces = false
         v.canScroll = false
         return v
     }()
@@ -34,7 +33,6 @@ class FSPersnalCenterFooterV: UIView{
         v.frame.origin.x = self.bounds.width
         v.dataSource = self
         v.delegate = self
-        v.bounces = false
         v.canScroll = false
         return v
     }()
@@ -44,7 +42,6 @@ class FSPersnalCenterFooterV: UIView{
         v.frame.origin.x = self.bounds.width*2
         v.dataSource = self
         v.delegate = self
-        v.bounces = false
         v.canScroll = false
         return v
     }()
@@ -62,6 +59,8 @@ class FSPersnalCenterFooterV: UIView{
         children.append(t1)
         children.append(t2)
         children.append(t3)
+        
+        //核心代码
         FSPersonalCenterScrollerManager.shared.viceScroller = t1
         
     }
@@ -83,7 +82,14 @@ class FSPersnalCenterFooterV: UIView{
 
 extension FSPersnalCenterFooterV: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        
+        if tableView == t1 {
+            return 30
+        } else if tableView == t2{
+            return 10
+        }else{
+            return 5
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -97,17 +103,18 @@ extension FSPersnalCenterFooterV: UITableViewDelegate, UITableViewDataSource{
         
     }
     
+    // 核心代码
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView is FSPersonalCenterTV {
             let fs = scrollView as! FSPersonalCenterTV
-            if fs.canScroll && fs.contentOffset == CGPoint.zero{
+            if fs.contentOffset.y <= 0{
                 FSPersonalCenterScrollerManager.shared.disnableScroll(scrollView)
             }
         }
     }
-    
+
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        
+
         if scrollView is FSPersonalCenterFooterContainer {
             let index = scrollView.contentOffset.x/self.bounds.width
             let sv = children[Int(index)]
