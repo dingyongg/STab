@@ -113,6 +113,7 @@ extension FSPersnalCenterFooterV: UITableViewDelegate, UITableViewDataSource{
         }
     }
 
+    // 核心代码
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
 
         if scrollView is FSPersonalCenterFooterContainer {

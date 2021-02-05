@@ -2,6 +2,7 @@
 
 import UIKit
 
+// 核心类
 class FSPersonalCenterTV: UITableView, UIGestureRecognizerDelegate {
     
     override init(frame: CGRect, style: UITableView.Style) {
